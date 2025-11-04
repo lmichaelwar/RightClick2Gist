@@ -272,13 +272,18 @@ function Wait-ForAccessToken {
                 switch ($response.error) {
                     "authorization_pending" {
                         Write-Verbose "Authorization pending, continuing to poll..."
-                        Write-Host "." -NoNewline -ForegroundColor Yellow
+                        # Show progress with elapsed time every 30 seconds
+                        if ($pollCount % 6 -eq 0) {
+                            Write-Host "`n  Still waiting... ($([int]$elapsed) seconds elapsed)" -ForegroundColor Yellow -NoNewline
+                        } else {
+                            Write-Host "." -NoNewline -ForegroundColor Yellow
+                        }
                         continue
                     }
                     "slow_down" {
                         $Interval += 5
                         Write-Verbose "Rate limited - increasing interval to $Interval seconds"
-                        Write-Host "⏱" -NoNewline -ForegroundColor Yellow
+                        Write-Host "`n  ⏱ Rate limited, slowing down polling..." -ForegroundColor Yellow -NoNewline
                         continue
                     }
                     "expired_token" {
@@ -413,7 +418,7 @@ function Test-AccessToken {
         
         # Test token with a simple API call
         $headers = @{
-            "Authorization" = "token $($config.access_token)"
+            "Authorization" = "Bearer $($config.access_token)"
             "Accept" = "application/vnd.github+json"
         }
         

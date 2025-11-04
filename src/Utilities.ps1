@@ -76,9 +76,9 @@ function Test-RightClick2GistSetup {
             return $false
         }
         
-        # Validate token is not expired (basic check)
-        if ($config.access_token.Length -lt 10) {
-            Write-Verbose "Access token appears invalid"
+        # Validate token exists and is not empty
+        if ([string]::IsNullOrWhiteSpace($config.access_token)) {
+            Write-Verbose "Access token is empty or null"
             return $false
         }
         

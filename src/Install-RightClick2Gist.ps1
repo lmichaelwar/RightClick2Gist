@@ -147,8 +147,10 @@ Note: You do NOT need the Client Secret for OAuth Device Flow.
             throw "Client ID cannot be empty"
         }
         
-        if ($clientId.Length -lt 10) {
-            throw "Client ID appears to be invalid (too short)"
+        # GitHub OAuth App client IDs typically start with "Iv1." or "Iv23."
+        if ($clientId -notmatch '^Iv[0-9]+\.') {
+            Write-Warning "Client ID format is unusual. GitHub OAuth App client IDs typically start with 'Iv1.' or 'Iv23.'"
+            Write-Warning "Proceeding anyway, but authentication may fail if the Client ID is incorrect."
         }
         
         Write-Host "✓ Client ID accepted: $clientId" -ForegroundColor Green

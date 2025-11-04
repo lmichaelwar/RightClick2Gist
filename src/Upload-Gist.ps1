@@ -320,7 +320,7 @@ function New-Gist {
         
         # Prepare headers
         $headers = @{
-            "Authorization" = "token $AccessToken"
+            "Authorization" = "Bearer $AccessToken"
             "Accept" = "application/vnd.github+json"
             "Content-Type" = "application/json"
         }

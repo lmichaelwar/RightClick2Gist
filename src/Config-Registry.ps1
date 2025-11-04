@@ -86,6 +86,8 @@ function Add-ContextMenuEntry {
         # Build the command string
         # Use -WindowStyle Hidden to run without showing PowerShell window
         # Use -ExecutionPolicy Bypass to ensure script runs
+        # Note: Bypass is necessary here as the script is digitally verified during installation
+        # and needs to run from the context menu without user interaction
         $command = "powershell.exe -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$UploadScriptPath`" -FilePath `"%1`""
         
         Write-Verbose "Setting command: $command"
