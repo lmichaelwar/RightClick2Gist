@@ -1,0 +1,47 @@
+# RightClick2Gist .gitignore
+
+# Configuration files (contains sensitive tokens)
+config.json
+.rightclick2gist/
+
+# Log files
+*.log
+rightclick2gist.log
+
+# PowerShell Module Cache
+*.psm1.cache
+
+# Test files
+test/
+tests/
+*.test.ps1
+
+# Temporary files
+*.tmp
+*.temp
+~$*
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Windows files
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Build artifacts
+dist/
+build/
+out/
+
+# Package files
+*.zip
+*.tar.gz
+*.7z
+
+# Documentation builds
+docs/_build/
